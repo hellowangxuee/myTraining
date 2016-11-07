@@ -7,7 +7,7 @@ tee 命令将通过管道的数据流截获并放进某个文件，他不是shel
 $ long-running-command &    //长时间运行的进程 id  
 $ sleep 5       //5秒之后出现提示符  
 $ & 表示命令的终止  
-$ echo hello >junk
+$ echo hello >junk  
 $ >junk echo hello       //两条命令是一样的效果，先运行带一个参数的echo ， 再把输出放入文件junk 中。
 ### 元字符
 |元字符|说明|
@@ -53,3 +53,11 @@ $ echo abc\\
 \> ghi  
 abcdefghi  
 行末尾加入\可以表示该行未完，避免 shell 中单行输入过长  
+### 创建新命令
+如果一个命令序列要被反复执行多次，那么最好把他组织成一个新命令，这样就可以像使用常规命令那样执行它。  
+例：  
+用管道线命令统计用户数量：  
+$ who | wc -l  
+要实现它，可以创建一个名为 nu 的新程序来完成这件工作。  
+$ echo 'who | wc -l' >nu  
+shell 和编辑器、who 或 wc 一样，也是一个程序，名字为 sh 。 
