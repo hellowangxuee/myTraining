@@ -61,3 +61,27 @@ $ who | wc -l
 要实现它，可以创建一个名为 nu 的新程序来完成这件工作。  
 $ echo 'who | wc -l' >nu  
 shell 和编辑器、who 或 wc 一样，也是一个程序，名字为 sh 。 
+*******
+终于可以直接复制粘贴了，再也不用自己用文字编辑命令了，好开心！！！   
+切换为root用户： sudo -i  
+```Linux
+baby-wx@babywx-B85M-HD3:~/wx$ echo 'who | wc -l' >nu
+baby-wx@babywx-B85M-HD3:~/wx$ ls
+nu
+baby-wx@babywx-B85M-HD3:~/wx$ cat nu
+who | wc -l
+baby-wx@babywx-B85M-HD3:~/wx$ sh < nu
+2
+baby-wx@babywx-B85M-HD3:~/wx$ sh nu
+2
+```
+如果一个文件是可执行的，且他包含文本文件，则 shell 认为这是一个 shell 命令组成的文件，成为 shell 文件。所以只需要让  nu 变成可执行的即可。  
+```linux
+baby-wx@babywx-B85M-HD3:~/wx$ chmod +x nu  
+```
+一般来说， nu 只有在当前目录中才能执行，为了使 nu 可以在任何工作目录下运行，可将它移到 bin 目录下，并将 /usr/you/bin 放入查找路径  
+### 命令参数
+shell 执行一个命令文件的时候，用第一个参数代替 $1 ,用第二个参数代替 $2 , 以此类推，直到 $9 。$* 表示任意串
+
+
+
