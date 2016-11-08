@@ -63,7 +63,22 @@ $ echo 'who | wc -l' >nu
 shell 和编辑器、who 或 wc 一样，也是一个程序，名字为 sh 。 
 *******
 终于可以直接复制粘贴了，再也不用自己用文字编辑命令了，好开心！！！   
-切换为root用户： sudo -i  
+#### 切换为root用户： 
+1. sudo -i  
+#### Ubuntu 下设置系统默认搜索路径的方法
+1. 打开 /etc/profile
+2. 在profile 文件最后加入脚本或可执行文件的路径，多个路径用：隔开  ，以 /usr/you/bin/nu 为例
+3. 保存关闭 profile 文件，执行
+4. 输出当前PATH值，发现已经有了想要的搜索路径。示例如下：
+```Linux
+sudo gedit /etc/profile
+
+export PATH=$PATH:/usr/you/bin
+
+source /etc/profile
+
+echo $PATH
+```
 ```Linux
 baby-wx@babywx-B85M-HD3:~/wx$ echo 'who | wc -l' >nu
 baby-wx@babywx-B85M-HD3:~/wx$ ls
