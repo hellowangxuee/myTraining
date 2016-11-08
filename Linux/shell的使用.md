@@ -65,6 +65,7 @@ shell 和编辑器、who 或 wc 一样，也是一个程序，名字为 sh 。
 终于可以直接复制粘贴了，再也不用自己用文字编辑命令了，好开心！！！   
 #### 切换为root用户： 
 1. sudo -i  
+
 #### Ubuntu 下设置系统默认搜索路径的方法
 1. 打开 /etc/profile
 2. 在profile 文件最后加入脚本或可执行文件的路径，多个路径用：隔开  ，以 /usr/you/bin/nu 为例
@@ -96,7 +97,34 @@ baby-wx@babywx-B85M-HD3:~/wx$ chmod +x nu
 ```
 一般来说， nu 只有在当前目录中才能执行，为了使 nu 可以在任何工作目录下运行，可将它移到 bin 目录下，并将 /usr/you/bin 放入查找路径  
 ### 命令参数
-shell 执行一个命令文件的时候，用第一个参数代替 $1 ,用第二个参数代替 $2 , 以此类推，直到 $9 。$* 表示任意串
-
-
-
+shell 执行一个命令文件的时候，用第一个参数代替 $1 ,用第二个参数代替 $2 , 以此类推，直到 $9 。$* 表示任意串  
+一个 shell 文件的参数不一定是文件名，例如，查询个人电话目录：  
+在 /usr/you/lib/phone-book 的文件中包含：  
+```Linux
+dial-a-joke 212-976-3838
+dial-a-prayer 212-246-4200
+dow jones report 212-976-4141
+```
+可以使用 grep 命令进行查找，搜索任何你想要查找的信息。  
+```linux
+# echo 'grep $* /usr/you/lib/phone-book' >411
+# cx 411
+# mv 411 /usr/you/bin
+# 411 joke
+dial-a-joke 212-976-3838
+# 411 dial
+dial-a-joke 212-976-3838
+dial-a-prayer 212-246-4200
+# 411 'dow jones'
+grep: jones: 没有那个文件或目录
+/usr/you/lib/phone-book:dow jones report 212-976-4141
+```
+显然最后一个包含空格的出了问题，空格将它变成了两个参数，显然是不可以的。补救措施：使用shell 的双引号。尽管单引号内部的字符串不佳解释，但 shell 会在双引号中寻找 $、\、和'...' 等特殊字符。因此可以修改411：  
+```Linux
+grep "$*" /usr/you/lib/phone-book
+```
+这样 $* 将会被参数代替，但它将作为一个参数而传递给 grep ，即使它包含空格。  
+```Linux
+root@babywx-B85M-HD3:/usr/you/lib# 411 'dow jones'
+dow jones report 212-976-4141
+```
