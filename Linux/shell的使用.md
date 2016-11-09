@@ -128,3 +128,49 @@ grep "$*" /usr/you/lib/phone-book
 root@babywx-B85M-HD3:/usr/you/lib# 411 'dow jones'
 dow jones report 212-976-4141
 ```
+### 程序输出作为参数
+任何程序的输出都可以放入命令行，只要使用（''）包住：  
+### shell 变量
+不是所有的 shell 变量都有特定的含义。你可以创建新的变量，给他们赋值。通常特殊意义的变量都是大写，因此普通变量名就用小写。  
+set 可以显示你定义的所有变量的值。如果只想查看一两个变量使用 echo 就够了。  
+一个变量的值与创建它的 shell 有关，而且该值并不会传递给子 shell。  
+```Linux
+baby-wx@babywx-B85M-HD3:/usr/you$ x=Hello
+baby-wx@babywx-B85M-HD3:/usr/you$ sh
+$ echo $x
+
+$ ctl-d
+baby-wx@babywx-B85M-HD3:/usr/you$ echo $x
+Hello
+```
+有时候通过 shell 文件来改变 shell 变量的值是很有用的。
+```Linux
+root@babywx-B85M-HD3:~# echo 'x="Good Bye"
+> echo $x' >setx
+root@babywx-B85M-HD3:~# cat setx
+x="Good Bye"
+echo $x
+root@babywx-B85M-HD3:~# echo $x               # x 在初始 shell 中是 Hello
+Hello
+root@babywx-B85M-HD3:~# sh setx               # x 在子 shell 中是 Good Bye，但在初始 shell 中还是 Hello
+Good Bye
+root@babywx-B85M-HD3:~# echo $x
+Hello
+```
+符号 2&>1 让shell 将标准错误输出合并到标准输出流中。还可以 1>&2 把标准输出流加入到标准错误输出流中：  
+ echo this 1>&2  
+在错误输出上打印结果。在 shell 中可以将信息送往终端，而不会偶然被遗忘在一个管道或者文件中。  
+here document:文件的输入就是该文件的一部分，而不是别的文件。 <<指示了这种结果，后面紧接着的单字用于终止输入， shell 要替换 here document 里的 $、'...'和\，除非单词前用了反斜杠。这种文件被看作文本文件。  
+### shell 程序里的循环
+for  变量  in 文件列表  
+do  
+    命令  
+done  
+例：  
+```linux
+$ for i in *
+> do
+>      echo $i
+> done
+```
+
