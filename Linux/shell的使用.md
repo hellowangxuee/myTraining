@@ -173,4 +173,3 @@ $ for i in *
 >      echo $i
 > done
 ```
-
