@@ -8,6 +8,9 @@ Lasso是一个线性模型，用于评估稀少系数下的数据类型。当参
 在python中Lasso的实现方法也很方便，只需要从linear_model线性模型中调用Lasso参数即可  
 Scikit learn包提供了两个通过交叉验证的方法来设置Lasso alpha参数：LassoCV and LassoLarsCV。  
 
+[`Lasso`](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Lasso.html#sklearn.linear_model.Lasso)：
+估计稀疏系数线性模型。它是在某些情况下有用，因为它趋向解决较少的参数值，有效地减少给定解决方案所依赖的变量的数量。  
+
 [`LassoCV`](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html#sklearn.linear_model.LassoCV)
 ：对于高维数据集，如果包含很多共线回归量，是一个非常合适的算法。  
 [`LassoLarsCV`](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoLarsCV.html#sklearn.linear_model.LassoLarsCV):
