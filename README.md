@@ -1,5 +1,5 @@
 # myTraining
-This is my training for my study.  
+This is my training for my study. （2016年暑假期间的学习笔记） 
 ### Ubuntu软件安装
 #### 安装国际版qq
 下载地址 ：http://pan.baidu.com/s/1eSHjIfg  
